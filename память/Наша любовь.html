@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Солнышко и Котёнок 💕</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
+    color: #4a2c3a;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+  /* Шапка */
+  header { text-align: center; padding: 60px 0 40px; }
+
+  header h1 {
+    font-size: 3em;
+    color: #be185d;
+    margin-bottom: 10px;
+    font-weight: normal;
+    letter-spacing: 1px;
+  }
+
+  header .subtitle {
+    font-size: 1.3em;
+    color: #db2777;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  header .names {
+    font-size: 1em;
+    color: #9d174d;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* Счётчик */
+  .counter-section {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 40px 20px;
+    margin: 40px 0;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(190, 24, 93, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .counter-section h2 {
+    font-size: 1.3em;
+    color: #9d174d;
+    margin-bottom: 25px;
+    font-weight: normal;
+    letter-spacing: 1px;
+  }
+
+  .counter { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+
+  .counter-block {
+    background: linear-gradient(135deg, #fff 0%, #fdf2f8 100%);
+    border-radius: 16px;
+    padding: 18px 22px;
+    min-width: 90px;
+    box-shadow: 0 4px 12px rgba(190, 24, 93, 0.08);
+    border: 1px solid rgba(251, 207, 232, 0.5);
+  }
+
+  .counter-number {
+    font-size: 1.9em;
+    font-weight: bold;
+    color: #be185d;
+    display: block;
+    line-height: 1.1;
+  }
+
+  .counter-label {
+    font-size: 0.7em;
+    color: #9d174d;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 5px;
+    display: block;
+  }
+
+  /* Таймлайн */
+  .timeline { margin: 70px 0; position: relative; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, #f9a8d4, #be185d, #f9a8d4, transparent);
+  }
+
+  .timeline-item { position: relative; padding-left: 65px; margin-bottom: 45px; }
+
+  .timeline-item::before {
+    content: '♥';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    font-size: 0.9em;
+    color: #be185d;
+    background: #fdf2f8;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid #f9a8d4;
+    box-shadow: 0 2px 8px rgba(190, 24, 93, 0.15);
+  }
+
+  .timeline-date {
+    font-size: 0.85em;
+    color: #db2777;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .timeline-title { font-size: 1.35em; color: #9d174d; margin-bottom: 8px; }
+
+  .timeline-text { color: #6b3a4a; font-size: 1em; }
+
+  .highlight {
+    background: rgba(251, 207, 232, 0.7);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-style: italic;
+  }
+
+  /* Галерея */
+  .gallery { margin: 70px 0; }
+
+  .gallery h2 {
+    text-align: center;
+    font-size: 1.7em;
+    color: #9d174d;
+    margin-bottom: 35px;
+    font-weight: normal;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+  }
+
+  .photo-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(190, 24, 93, 0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .photo-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(190, 24, 93, 0.2);
+  }
+
+  .photo-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    background: #fce7f3;
+  }
+
+  .photo-card video {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    background: #fce7f3;
+  }
+
+  .photo-card .caption {
+    padding: 16px;
+    text-align: center;
+    font-size: 0.95em;
+    color: #9d174d;
+    font-style: italic;
+    background: linear-gradient(to bottom, #fff, #fdf2f8);
+  }
+
+  /* Музыка */
+  .music-section {
+    text-align: center;
+    margin: 70px 0 40px;
+    padding: 35px 25px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    box-shadow: 0 8px 30px rgba(190, 24, 93, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .music-section h2 {
+    font-size: 1.3em;
+    color: #9d174d;
+    margin-bottom: 20px;
+    font-weight: normal;
+    letter-spacing: 1px;
+  }
+
+  .music-section .song-title {
+    font-size: 1.15em;
+    color: #db2777;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  audio { width: 100%; max-width: 420px; border-radius: 30px; }
+
+  /* Подвал */
+  footer {
+    text-align: center;
+    padding: 50px 0 30px;
+    color: #db2777;
+    font-size: 1em;
+  }
+
+  footer .heart {
+    font-size: 1.4em;
+    animation: pulse 1.5s infinite;
+    display: inline-block;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+  }
+
+  /* Мобильная адаптация */
+  @media (max-width: 600px) {
+    header h1 { font-size: 2em; }
+    header .subtitle { font-size: 1.1em; }
+    .counter { gap: 8px; }
+    .counter-block { padding: 12px 14px; min-width: 70px; }
+    .counter-number { font-size: 1.5em; }
+    .photo-card img,
+    .photo-card video { height: 240px; }
+    .timeline-item { padding-left: 55px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ШАПКА -->
+  <header>
+    <h1>Солнышко <span style="color:#f472b6;">&</span> Котёнок</h1>
+    <p class="subtitle">«Киса, подай мне знак»</p>
+    <p class="names">7 января 2026 · 00:00</p>
+  </header>
+
+  <!-- СЧЁТЧИК -->
+  <section class="counter-section">
+    <h2>Мы вместе уже</h2>
+    <div class="counter" id="counter">
+      <div class="counter-block">
+        <span class="counter-number" id="days">0</span>
+        <span class="counter-label">дней</span>
+      </div>
+      <div class="counter-block">
+        <span class="counter-number" id="hours">0</span>
+        <span class="counter-label">часов</span>
+      </div>
+      <div class="counter-block">
+        <span class="counter-number" id="minutes">0</span>
+        <span class="counter-label">минут</span>
+      </div>
+      <div class="counter-block">
+        <span class="counter-number" id="seconds">0</span>
+        <span class="counter-label">секунд</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ТАЙМЛАЙН -->
+  <section class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">7 Января 2026, 00:00</div>
+      <div class="timeline-title">Начало нашей истории</div>
+      <div class="timeline-text">С этого момента мы — Солнышко и Котёнок. Время, с которого всё считается.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">13 Июня, 14:00</div>
+      <div class="timeline-title">Тот самый день</div>
+      <div class="timeline-text">
+        Первая прогулка. Первый поцелуй. Первый раз, когда я тебя <span class="highlight">лапал</span>.
+        Всё в один день, всё в 14:00. Идеально.
+      </div>
+    </div>
+  </section>
+
+  <!-- ФОТО -->
+  <section class="gallery">
+    <h2>Наши моменты</h2>
+    <div class="gallery-grid">
+
+      <div class="photo-card">
+        <img src="photo1.jpg" alt="Букет роз">
+        <div class="caption">Тот самый букет</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo2.jpg" alt="Объятия в парке">
+        <div class="caption">Мой самый родной человек</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo3.jpg" alt="Вместе в парке">
+        <div class="caption">Вместе — и это главное</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo4.jpg" alt="Моё солнышко">
+        <div class="caption">Моё солнышко</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo5.jpg" alt="В зале">
+        <div class="caption">Даже в зале мы вместе 😄</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo6.jpg" alt="Дома">
+        <div class="caption">Дома, где тепло</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo7.jpg" alt="Новый год">
+        <div class="caption">Наш Новый год</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo8.jpg" alt="Держу за руку">
+        <div class="caption">Держу тебя за руку</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ВИДЕО -->
+  <section class="gallery">
+    <h2>Наши видео</h2>
+    <div class="gallery-grid">
+
+      <div class="photo-card">
+        <video controls muted loop playsinline>
+          <source src="video1.mp4" type="video/mp4">
+          Твой браузер не поддерживает видео.
+        </video>
+        <div class="caption">Наш первый момент 🎥</div>
+      </div>
+
+      <div class="photo-card">
+        <video controls muted loop playsinline>
+          <source src="video2.mp4" type="video/mp4">
+          Твой браузер не поддерживает видео.
+        </video>
+        <div class="caption">То самое первое видео с нашим участием</div>
+      </div>
+
+      <div class="photo-card">
+        <video controls muted loop playsinline>
+          <source src="video3.mp4" type="video/mp4">
+          Твой браузер не поддерживает видео.
+        </video>
+        <div class="caption">Вместе 💕</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- МУЗЫКА -->
+  <section class="music-section">
+    <h2>Наша песня</h2>
+    <p class="song-title">Дора & Toxi$ — «ЗНАК»</p>
+    <audio controls loop>
+      <source src="znak.mp3" type="audio/mpeg">
+      Твой браузер не поддерживает аудио.
+      <a href="znak.mp3">Скачай песню здесь</a>.
+    </audio>
+  </section>
+
+  <!-- ПОДВАЛ -->
+  <footer>
+    <p>Солнышко, я тебя люблю <span class="heart">♥</span></p>
+    <p style="margin-top:12px; font-size:0.85em; color:#be185d;">Твой Котёнок</p>
+  </footer>
+
+</div>
+
+<!-- СКРИПТ СЧЁТЧИКА -->
+<script>
+  const startDate = new Date('2026-01-07T00:00:00');
+
+  function updateCounter() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = hours;
+    document.getElementById('minutes').textContent = minutes;
+    document.getElementById('seconds').textContent = seconds;
+  }
+
+  updateCounter();
+  setInterval(updateCounter, 1000);
+</script>
+
+</body>
+</html>
